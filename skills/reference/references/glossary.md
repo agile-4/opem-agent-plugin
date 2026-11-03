@@ -1,0 +1,27 @@
+# Glossary
+
+- **Organisation**: the customer's account in Opem; billing, plan, team and projects hang off it. One Free organisation per person.
+- **Project**: one installation of the widget, usually one product or site, with its own keys, requests, knowledge, assistant and widget settings.
+- **Publishable key** (`pk_live_…`, `pk_test_…`): identifies the project in the browser; public; works only from allowed origins.
+- **Secret key** (`sk_…`): the management API's credential, for servers and CI; shown once; Professional and Enterprise.
+- **Verification secret** (`vs_…`): the HMAC key a server signs identities with; shown once.
+- **Webhook secret** (`whsec_…`): the HMAC key Opem signs deliveries with; shown once per endpoint.
+- **Allowed origins**: the scheme, host and port combinations the widget may load from, up to 20 per project.
+- **Identity**: who the person using the widget is, from `Opem.identify()`; signed by the host's server; carries optional roles.
+- **Anonymous visitor** (`anon_…`): a person the widget knows only by an id Opem issued; allowed per project.
+- **Roles**: the person's roles in the host's app, signed into the identity; they open documents tagged with `access`.
+- **Request**: a message from a person to the team, raised in the widget, with a kind (Problem, Question, Idea or the project's own), a reference such as `ACME-42`, a status (sent, replied, closed) and a thread.
+- **Ask**: the widget's tab where the assistant answers from the project's knowledge documents.
+- **Knowledge document**: a Markdoc or Markdown file in the project, synced, uploaded, written in the dashboard or crawled; split into sections by heading.
+- **Section**: one heading and the text under it; what the assistant chooses from and answers with.
+- **Access tag**: `access` in front matter or `{% access roles=[…] %}` around sections; limits who gets answers from them.
+- **Sync**: sending documents by path through the management API; new paths added, changed updated, unchanged left, and with prune, gone paths removed.
+- **Crawl**: Opem fetching a page or a sitemap weekly as documents.
+- **Help centre**: the public read-only pages of a project's documents at `support.opem.app/help/<slug>`.
+- **Widget settings**: features, kinds, appearance, strings and context, saved on the Widget page and read by the widget from `/config`.
+- **Launcher**: the Help button; position and label are settings, `launcher: false` hides it.
+- **Context**: what the widget sends about the page with a question or a request: address, title, browser facts, and the listed `extra` values.
+- **Credits**: the unit AI answers on Opem's key are metered in; one credit is one US cent of model cost.
+- **Management API**: `/api/v1/manage/*`, the server-to-server API: project, knowledge sync, requests, usage.
+- **Widget API**: `/api/v1/widget/*`, what the widget calls from the browser with the publishable key and the origin.
+- **Dashboard**: `support.opem.app`, where staff work; signed in with Neon Auth.

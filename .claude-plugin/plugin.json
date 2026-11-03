@@ -1,0 +1,26 @@
+{
+  "name": "opem",
+  "displayName": "Opem",
+  "version": "0.1.0",
+  "description": "Install, configure and embed the Opem Help widget from your editor: the script tag and npm packages, Content-Security-Policy, allowed origins, identity signing, documentation sync, webhooks and every error code.",
+  "author": {
+    "name": "Agile 4 Ltd",
+    "url": "https://opem.app"
+  },
+  "homepage": "https://opem.app/docs/agents",
+  "repository": "https://github.com/agile-4/opem-agent-plugin",
+  "license": "MIT",
+  "keywords": [
+    "opem",
+    "help widget",
+    "customer support",
+    "support widget",
+    "knowledge base",
+    "webhooks"
+  ],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://opem.app/docs/agents",
+  "supportUrl": "https://opem.app/contact",
+  "privacyPolicyUrl": "https://opem.app/legal/privacy",
+  "termsOfServiceUrl": "https://opem.app/legal/terms"
+}

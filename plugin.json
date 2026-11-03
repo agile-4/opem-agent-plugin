@@ -1,0 +1,46 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "opem",
+  "version": "0.1.0",
+  "description": "Install, configure and embed the Opem Help widget from your editor: the script tag and npm packages, Content-Security-Policy, allowed origins, identity signing, documentation sync, webhooks and every error code.",
+  "author": {
+    "name": "Agile 4 Ltd",
+    "url": "https://opem.app"
+  },
+  "homepage": "https://opem.app/docs/agents",
+  "repository": "https://github.com/agile-4/opem-agent-plugin",
+  "license": "MIT",
+  "keywords": [
+    "opem",
+    "help widget",
+    "customer support",
+    "support widget",
+    "knowledge base",
+    "webhooks"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Opem",
+        "shortDescription": "Add the Opem Help widget",
+        "longDescription": "Opem is a Help widget a company adds to its web app with one script tag, and a dashboard where its support staff answer. This plugin teaches your coding agent to install the widget (script tag, @opem/browser, @opem/react), set the Content-Security-Policy and allowed origins, sign identities on your server, sync your Markdoc documentation, verify webhooks, customise the widget from code and explain every error code. It holds no credentials: you copy your keys from the dashboard into your own environment file.",
+        "developerName": "Agile 4 Ltd",
+        "category": "Developer Tools",
+        "capabilities": ["Interactive", "Write"],
+        "websiteURL": "https://opem.app/docs/agents",
+        "supportURL": "https://opem.app/contact",
+        "privacyPolicyURL": "https://opem.app/legal/privacy",
+        "termsOfServiceURL": "https://opem.app/legal/terms",
+        "defaultPrompt": [
+          "Add the Opem Help widget to this app",
+          "Why does the Opem widget not appear on my site?",
+          "Sign Opem identities on my server"
+        ],
+        "brandColor": "#141414",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png"
+      },
+      "onboardingSkill": "./skills/onboard/SKILL.md"
+    }
+  }
+}

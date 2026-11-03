@@ -1,0 +1,28 @@
+{
+  "name": "opem",
+  "description": "The Opem plugin for coding agents, published by Agile 4 Ltd.",
+  "owner": {
+    "name": "Agile 4 Ltd",
+    "url": "https://opem.app"
+  },
+  "plugins": [
+    {
+      "name": "opem",
+      "source": "./",
+      "description": "Install, configure and embed the Opem Help widget from your editor: the script tag and npm packages, Content-Security-Policy, allowed origins, identity signing, documentation sync, webhooks and every error code.",
+      "category": "development",
+      "relevance": {
+        "signals": {
+          "manifestDeps": [
+            {
+              "file": "[/\\\\]package\\.json$",
+              "pattern": "\"@opem/"
+            }
+          ],
+          "hosts": ["support.opem.app"],
+          "filesRead": ["**/*opem*"]
+        }
+      }
+    }
+  ]
+}

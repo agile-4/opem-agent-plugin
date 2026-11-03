@@ -1,0 +1,27 @@
+{
+  "comment": "Known answers from openssl for the identity signature (docs/features/end-user-identification.md): HMAC-SHA256 with the secret over the id, a newline and the lower-cased email, then, only with roles, a newline, the roles sorted and comma-joined, a newline and signedAt. signIdentity() and the developer docs' samples in every language are checked against these (#302).",
+  "secret": "vs_test_secret",
+  "vectors": [
+    {
+      "id": "user-1",
+      "email": "Jane@Example.COM",
+      "roles": ["owner", "billing"],
+      "signedAt": 1793318400,
+      "signature": "c92adf4e3c1f372d4dfdf0d83c7cb1ed8d70a3a99f622a7dcc9304f89218e74c"
+    },
+    {
+      "id": "user-1",
+      "email": null,
+      "roles": [],
+      "signedAt": 1793318400,
+      "signature": "b49974ada965a93c2df44a04e60fca9de2f8defb3c37103199c66c43f6728d0e"
+    },
+    {
+      "id": "user-1",
+      "email": null,
+      "roles": ["owner"],
+      "signedAt": 1793318400,
+      "signature": "20f5bc749113de7753886900b740cd1d588003de342e4dc5ef6575ad1b9e1213"
+    }
+  ]
+}
