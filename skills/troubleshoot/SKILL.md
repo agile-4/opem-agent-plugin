@@ -44,6 +44,7 @@ When the MCP server cannot be connected, the same facts are in the dashboard: th
 | Logo or screenshots missing | `img-src` lacks `blob:` | Same |
 | Console `identity_signature_invalid` or `_required` | Signed on the wrong string, or unsigned where the project's "Require signed identities" switch is on | `identify` skill; `check-signature.mjs --vectors` |
 | `403` `plan_limit_reached` on a sync or a webhook | The plan has no management API, or a cap is reached | [plan-limits.md](references/plan-limits.md); upgrade or wait for the month |
+| `verify-config.sh` says "Opem answered 5xx" | A failure on Opem's side; it is not the key, the origin or the policy | Change nothing in the install; quote the request id to support and retry after a minute |
 | `429` `rate_limited` | Over a limit in [rate-limits.md](references/rate-limits.md) | Wait for `Retry-After`; batch sync calls; do not poll, use webhooks |
 | `422` `validation_failed` | A field breaks the rules; unknown fields are refused, not ignored | Read `issues[].path` |
 | Widget loads on production, not on a preview host | Each host is its own origin | Add the preview origin, or use a wildcard-free list of the hosts you deploy to |

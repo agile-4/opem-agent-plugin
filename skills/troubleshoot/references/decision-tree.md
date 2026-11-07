@@ -11,4 +11,5 @@
 5. **A server call fails?** `401`: the secret key (`sk_`) is missing or revoked, or two credentials were sent at once. `403` `plan_limit_reached`: the plan or a cap. `429`: a rate limit. `422`: the body; read `issues`. `knowledge-sync` or `webhooks` skill.
 6. **Webhook deliveries fail?** The Deliveries log on the Webhooks tab shows the status and reason; `webhooks` skill, `local-testing.md`.
 7. **`verify-config.sh` or `diagnose.sh` says the deployment is protected by Vercel Authentication?** Vercel's login stands in front of that host, so the widget loads there from no origin and the key cannot be checked. Use the production host's snippet, or turn protection off for that domain; it is not a revoked key.
-8. **Everything works locally, not on a deployed host?** Each host is its own origin, including preview hosts; the CSP of the deployed site may differ from the local one.
+8. **`/config` answers a `5xx` (`verify-config.sh` says "Opem answered 5xx")?** The failure is on Opem's side: it is not the key, the origin or the policy, so change nothing in the install. Quote the request id the script prints to support and retry after a minute.
+9. **Everything works locally, not on a deployed host?** Each host is its own origin, including preview hosts; the CSP of the deployed site may differ from the local one.

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Checks an Opem install the way the widget does: GET /api/v1/widget/config with the page's Origin
 # and the project's publishable key. Prints the status, the error code when there is one, and what
-# to do about it. Exit 0 on 200, 1 otherwise.
+# to do about it; a 5xx is named as Opem's side, with the request id. Exit 0 on 200, 1 otherwise.
 #
 # The base url is the host the widget script loads from: `scriptOrigin` in get_install_snippet's
 # result, or the scheme and host in the `src` of the snippet the developer pasted. It defaults to
@@ -57,6 +57,9 @@ case "$status" in
        fi ;;
   429) echo "Rate limited; wait for Retry-After and try again." ;;
   000) echo "No answer from $base. Check the base URL and the network." ;;
+  5??) # Opem's own failure. Never print the body: name the side it is on and the id support needs.
+       request_id="$(grep -o '"requestId" *: *"[A-Za-z0-9_-]*"' "$body" | head -1 | cut -d'"' -f4)"
+       echo "Opem answered $status${code:+ ($code)}: this is on Opem's side, not the install. Quote the request id to support: ${request_id:-no request id in the answer}." ;;
   *)   echo "Unexpected answer:"; head -c 400 "$body"; echo ;;
 esac
 exit 1
