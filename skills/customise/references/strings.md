@@ -45,7 +45,7 @@ The 112 strings the widget shows, in British English. A project overrides them o
 | `ask.cutShort` | This answer was cut short. | Under an answer that ended early |
 | `ask.refused` | I can't help with that one. You can send a request instead. | When the assistant declines a question |
 | `ask.offline` | You're offline. Check your connection and try again. | When the browser is offline |
-| `ask.signInToAsk` | Sign in to ask questions. | When only signed-in people may ask |
+| `ask.signInToAsk` | Sign in to ask questions. | When the server refuses a question (forbidden) |
 | `ask.answerReady` | Answer ready | Announced to screen readers when an answer is complete |
 | `request.kind` | What is it about? | The question above the request kinds in New request |
 | `request.message` | Message | The message box's label in New request |

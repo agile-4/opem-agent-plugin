@@ -6,7 +6,7 @@ The only network calls it ever makes are the ones you ask for, to your own proje
 
 | Call | When | What it carries |
 |---|---|---|
-| `GET https://support.opem.app/api/v1/widget/config` | `install`'s `verify-config.sh`, `troubleshoot`'s `diagnose.sh` | Your publishable key and your site's origin, exactly as the widget sends them |
+| `GET <base url>/api/v1/widget/config` (`https://support.opem.app` unless your snippet names another host) | `install`'s `verify-config.sh`, `troubleshoot`'s `diagnose.sh` | Your publishable key and your site's origin, as the widget sends them, and `X-Opem-Probe: 1` so the check is not counted as a page load |
 | `HEAD <your page>` | `diagnose.sh` with a page URL | Nothing but the request |
 | `PUT /api/v1/manage/knowledge/documents` | the sync script you copy into your repository, run by you or your CI | Your documents and your secret key, from your own environment |
 | `POST <your endpoint>` | `sign-test-delivery.mjs`, to your own local server | A sample body signed with a test secret you choose |

@@ -4,11 +4,18 @@
 # lacks. The header is read from the final response after redirects; a policy in a <meta> tag is
 # not seen. CSP_HEADER in the environment replaces the fetch (the tests use it).
 #
+# The base url is the host the widget script loads from: `scriptOrigin` in get_install_snippet's
+# result, or the scheme and host in the `src` of the snippet the developer pasted (default
+# https://support.opem.app). It is the host /config is called on and the source the policy must
+# allow. The /config call goes through verify-config.sh, which sends `X-Opem-Probe: 1` so the check
+# is not recorded as a page load; the page itself is fetched without any Opem header.
+#
 #   bash diagnose.sh <origin> <publishable key> [page url] [base url]
+#   bash diagnose.sh http://localhost:3000 pk_abc123 http://localhost:3000/ https://support.opem.app
 set -u
-origin="${1:-}"; key="${2:-}"; page="${3:-}"; base="${4:-https://support.opem.app}"
+origin="${1:-}"; key="${2:-}"; page="${3:-}"; base="${4:-https://support.opem.app}"; base="${base%/}"
 if [ -z "$origin" ] || [ -z "$key" ]; then
-  echo "usage: diagnose.sh <origin> <publishable key> [page url] [base url]" >&2
+  echo "usage: diagnose.sh <origin> <publishable key, pk_…> [page url] [base url, the host in the snippet's src; default https://support.opem.app]" >&2
   exit 2
 fi
 here="$(cd "$(dirname "$0")" && pwd)"

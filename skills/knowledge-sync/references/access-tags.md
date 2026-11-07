@@ -4,11 +4,13 @@
 
 Restricting documents and sections to the roles a signed identity carries, as the help article explains it to staff.
 
-From the help article "Limit answers to some of your users" (`docs/help/knowledge/limit-answers-to-roles.md`, reviewed 2026-10-31). The same text answers in the Ask tab on opem.app.
+From the help article "Limit answers to some of your users" (`docs/help/knowledge/limit-answers-to-roles.md`, reviewed 2026-11-05). The same text answers in the Ask tab on opem.app.
 
 ## Can I give some documents only to some of my users?
 
-Yes. Tag a document or a section with one or more roles, and the assistant answers from it only for people whose identity carries one of those roles. Every document is public until you tag it.
+Yes, on the Professional and Enterprise plans. Tag a document or a section with one or more roles, and the assistant answers from it only for people whose identity carries one of those roles. Every document is public until you tag it.
+
+On Free and Basic the tags cannot be changed and the roles your app signs are not read, so anything tagged is hidden from everyone rather than shown to the wrong people. If you move to one of those plans with tags in place, the Knowledge page says how many documents and sections are hidden, with an Upgrade link; the tags stay, and answers from them come back when you upgrade.
 
 The roles come from your own app: your server signs them into each person's identity, as it signs their id and email. Opem never decides who has a role; it only reads what your server signed.
 

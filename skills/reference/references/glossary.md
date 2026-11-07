@@ -2,12 +2,12 @@
 
 - **Organisation**: the customer's account in Opem; billing, plan, team and projects hang off it. One Free organisation per person.
 - **Project**: one installation of the widget, usually one product or site, with its own keys, requests, knowledge, assistant and widget settings.
-- **Publishable key** (`pk_live_…`, `pk_test_…`): identifies the project in the browser; public; works only from allowed origins.
+- **Publishable key** (`pk_` followed by the id): identifies the project in the browser; public; works only from allowed origins, and only on the deployment that issued it.
 - **Secret key** (`sk_…`): the management API's credential, for servers and CI; shown once; Professional and Enterprise.
 - **Verification secret** (`vs_…`): the HMAC key a server signs identities with; shown once.
 - **Webhook secret** (`whsec_…`): the HMAC key Opem signs deliveries with; shown once per endpoint.
 - **Allowed origins**: the scheme, host and port combinations the widget may load from, up to 20 per project.
-- **Identity**: who the person using the widget is, from `Opem.identify()`; signed by the host's server; carries optional roles.
+- **Identity**: who the person using the widget is, from `Opem.identify()`; signed by the host's server when Opem should trust it, and unsigned, accepted as unverified, where the project's switch is off; carries optional roles.
 - **Anonymous visitor** (`anon_…`): a person the widget knows only by an id Opem issued; allowed per project.
 - **Roles**: the person's roles in the host's app, signed into the identity; they open documents tagged with `access`.
 - **Request**: a message from a person to the team, raised in the widget, with a kind (Problem, Question, Idea or the project's own), a reference such as `ACME-42`, a status (sent, replied, closed) and a thread.

@@ -7,5 +7,5 @@ All three answer `401` on widget calls only.
 | Code | When |
 |---|---|
 | `identity_required` | The call needs to know who the person is, and the widget has no identity and anonymous visitors are off for the project. |
-| `identity_signature_required` | The project requires verification (every paid plan; a toggle on Free) and the identity came without a signature. |
+| `identity_signature_required` | The project's "Require signed identities" switch is on (any plan; off by default) and the identity came without a signature. With the switch off, an unsigned identity is accepted as unverified. |
 | `identity_signature_invalid` | The signature does not match: a different secret, an id or email changed after signing, roles other than the signed ones, or a `signedAt` more than five minutes ahead of Opem's clock. Recompute on the server with `check-signature.mjs` against the test vectors. A `signedAt` more than a day old is not an error: the call stays verified and the roles are dropped until the page signs again. |

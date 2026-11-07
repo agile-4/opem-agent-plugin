@@ -11,7 +11,7 @@ One tag before `</body>`, with the project's publishable key. The widget loads i
 ```html file=script-tag.html
 <script
   src="https://support.opem.app/v1/widget.js"
-  data-project="pk_live_…"
+  data-project="pk_…"
   defer
 ></script>
 ```
@@ -23,7 +23,7 @@ One tag before `</body>`, with the project's publishable key. The widget loads i
 ```ts file=esm.ts
 import { Opem } from "@opem/browser";
 
-Opem.init({ projectKey: "pk_live_…" });
+Opem.init({ projectKey: "pk_…" });
 ```
 
 ## React provider
@@ -35,7 +35,7 @@ import { OpemButton, OpemProvider } from "@opem/react";
 
 export function App() {
   return (
-    <OpemProvider projectKey="pk_live_…">
+    <OpemProvider projectKey="pk_…">
       <OpemButton>Help</OpemButton>
     </OpemProvider>
   );

@@ -122,3 +122,62 @@ func OpemSignature(userID, email string, roles []string, signedAt int64) string 
 	return hex.EncodeToString(mac.Sum(nil))
 }
 ```
+
+## C#
+
+A static class with the standard library only; .NET 6 or later.
+
+```csharp file=identity/sign.cs
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
+public static class OpemIdentity
+{
+    // Sign on your server; signedAt is DateTimeOffset.UtcNow.ToUnixTimeSeconds(), passed to Opem.identify() as signedAt.
+    public static string Signature(string userId, string? email, string[] roles, long signedAt)
+    {
+        var message = userId + "\n" + (email ?? "").ToLowerInvariant();
+        if (roles.Length > 0)
+        {
+            var sorted = roles.OrderBy(role => role, StringComparer.Ordinal);
+            message += "\n" + string.Join(",", sorted) + "\n" + signedAt.ToString(CultureInfo.InvariantCulture);
+        }
+        var secret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("OPEM_VERIFICATION_SECRET")!);
+        var mac = HMACSHA256.HashData(secret, Encoding.UTF8.GetBytes(message));
+        return Convert.ToHexString(mac).ToLowerInvariant();
+    }
+}
+```
+
+## Java
+
+A final class with the standard library only; Java 17 or later.
+
+```java file=identity/sign.java
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+public final class OpemIdentity {
+    // Sign on your server; signedAt is Instant.now().getEpochSecond(), passed to Opem.identify() as signedAt.
+    public static String signature(String userId, String email, List<String> roles, long signedAt)
+            throws GeneralSecurityException {
+        String message = userId + "\n" + (email == null ? "" : email.toLowerCase(Locale.ROOT));
+        if (!roles.isEmpty()) {
+            List<String> sorted = roles.stream().sorted().toList();
+            message += "\n" + String.join(",", sorted) + "\n" + signedAt;
+        }
+        byte[] secret = System.getenv("OPEM_VERIFICATION_SECRET").getBytes(StandardCharsets.UTF_8);
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(secret, "HmacSHA256"));
+        return HexFormat.of().formatHex(mac.doFinal(message.getBytes(StandardCharsets.UTF_8)));
+    }
+}
+```

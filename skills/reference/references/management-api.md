@@ -199,6 +199,7 @@ Parameters:
 | `kind` | query | string | no |  | matches ^[a-z][a-z0-9-]{0,31}$ |
 | `blocking` | query | string | no |  | one of "true", "false" |
 | `endUserId` | query | string (uuid) | no |  |  |
+| `identity` | query | string | no |  | one of "verified", "unverified", "anonymous" |
 | `since` | query | string (date) | no |  |  |
 | `until` | query | string (date) | no |  |  |
 

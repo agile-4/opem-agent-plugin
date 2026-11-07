@@ -62,7 +62,6 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `features.hybridSearch` | boolean | yes |  |  |
 | `allowedOrigins` | array of string | yes |  |  |
 | `identity` | object | yes |  |  |
-| `identity.required` | boolean | yes |  |  |
 | `identity.enabled` | boolean | yes |  |  |
 | `identity.secret` | object or null | yes |  |  |
 | `identity.secret.prefix` | string | yes |  |  |
@@ -74,3 +73,6 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `install.publishableKey` | string or null | yes |  |  |
 | `install.lastSeenAt` | string (date-time) or null | yes |  |  |
 | `install.lastSeenOrigin` | string or null | yes |  |  |
+| `install.lastIdentityAt` | string (date-time) or null | yes |  |  |
+| `install.lastIdentityOrigin` | string or null | yes |  |  |
+| `install.deploymentProtected` | boolean | yes |  |  |

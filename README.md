@@ -12,7 +12,7 @@ Eight skills, each loaded when the conversation needs it:
 |---|---|
 | `onboard` | Signing up, creating a project and finding your keys |
 | `install` | The script tag, `@opem/browser`, `@opem/react`, Content-Security-Policy and allowed origins, and a check against the live `/config` endpoint |
-| `identify` | Signing users' identities on your server, in Node.js, Python, Ruby, PHP and Go |
+| `identify` | Telling the widget who your users are with Opem.identify(), then signing on your server in Node.js, Python, Ruby, PHP, Go, C# and Java |
 | `knowledge-sync` | Syncing Markdoc documentation from your repository, from CI |
 | `webhooks` | Verifying and handling Opem's webhook deliveries |
 | `customise` | The `window.Opem` surface: kinds, theme, launcher, strings, your own button, events |
@@ -46,9 +46,11 @@ https://github.com/agile-4/opem-agent-plugin
 
 Install Opem from the Plugins directory once it is listed there; until then a workspace admin can import this repository as a plugin marketplace.
 
+The folder carries both manifests: `.claude-plugin/plugin.json` and `.mcp.json` for Claude Code, `plugin.json` and `mcp.json` (Agent Plugins 1.0.0) for Codex and ChatGPT; both marketplace files point at `./`.
+
 ## Connect
 
-The plugin declares Opem's MCP server, `https://support.opem.app/api/v1/mcp`. Connect it once (sign in, choose the organisation, consent) and the agent creates projects, reads the install snippet, adds allowed origins, changes widget settings, creates keys, syncs documents and makes webhooks as the signed-in staff member, within that member's role and plan. Every write is audit-logged; revoke the connection from Settings > Agents. Without a connection every skill still works with keys pasted from the dashboard.
+The plugin declares Opem's MCP server, `https://support.opem.app/api/v1/mcp`. Connect it once (sign in, choose the organisation, consent) and the agent creates projects, reads the install snippet, adds allowed origins, changes widget settings, creates keys, syncs documents and makes webhooks as the signed-in staff member, within that member's role and plan. Every write is audit-logged; revoke the connection from Settings > Agents. Every skill checks for the connection first and, when only the `authenticate` tool is there, asks you to sign in before anything else. Without a connection every skill still works with keys pasted from the dashboard.
 
 ## What it sends
 

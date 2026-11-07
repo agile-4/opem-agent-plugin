@@ -6,7 +6,7 @@ The signature is HMAC-SHA256, keyed with the project's verification secret, over
 <id> "\n" <email in lower case, or nothing>
 ```
 
-and, only when roles are sent (one or more):
+and, only when you send roles (one or more):
 
 ```
 <id> "\n" <email in lower case, or nothing> "\n" <roles sorted, joined with ","> "\n" <signedAt>

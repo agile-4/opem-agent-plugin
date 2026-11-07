@@ -11,7 +11,7 @@
 | Strings for one page | `init({ strings })` | Basic and above (ignored otherwise) |
 | Context: extra value names and blanked parameters | Widget page, Context tab | every plan |
 | Which page the person is on, extra values | `Opem.context()` or `init({ context })` | every plan |
-| Allowed origins, identity verification, keys | Configuration page | every plan (verification required on paid plans) |
+| Allowed origins, identity verification, keys | Configuration page | every plan (verification is the project's switch, off by default) |
 | Opening the panel, preselecting a kind, pinning an error or a title, a screenshot | `Opem.open()` | every plan |
 | Unread count in the app's own menu | `Opem.badge()` and the `request:replied` event | every plan |
 

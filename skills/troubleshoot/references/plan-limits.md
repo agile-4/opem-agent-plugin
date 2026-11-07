@@ -23,7 +23,6 @@ Prices in US dollars a month; annual billing charges ten months for twelve. Ente
 | Remove "Powered by Opem" | no | yes | yes | yes |
 | Help centre custom address | no | yes | yes | yes |
 | Management API and webhooks | no | no | yes | yes |
-| Identity verification | optional | required | required | required |
 | Transcript retention, days | 7 | 30 | 90 | custom |
 | Custom sending domain | no | no | no | yes |
 | Single sign-on | no | no | no | yes |
