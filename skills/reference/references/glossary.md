@@ -3,7 +3,7 @@
 - **Organisation**: the customer's account in Opem; billing, plan, team and projects hang off it. One Free organisation per person.
 - **Project**: one installation of the widget, usually one product or site, with its own keys, requests, knowledge, assistant and widget settings.
 - **Publishable key** (`pk_` followed by the id): identifies the project in the browser; public; works only from allowed origins, and only on the deployment that issued it.
-- **Secret key** (`sk_…`): the management API's credential, for servers and CI; shown once; Professional and Enterprise.
+- **Secret key** (`sk_…`): the management API's credential, for servers, the sync script and CI; shown once; on every plan, reaching the knowledge sync only on Free and Basic and the whole management API on Professional and Enterprise.
 - **Verification secret** (`vs_…`): the HMAC key a server signs identities with; shown once.
 - **Webhook secret** (`whsec_…`): the HMAC key Opem signs deliveries with; shown once per endpoint.
 - **Allowed origins**: the scheme, host and port combinations the widget may load from, up to 20 per project.

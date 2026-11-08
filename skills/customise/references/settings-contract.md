@@ -76,3 +76,5 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `install.lastIdentityAt` | string (date-time) or null | yes |  |  |
 | `install.lastIdentityOrigin` | string or null | yes |  |  |
 | `install.deploymentProtected` | boolean | yes |  |  |
+| `install.assistantReady` | boolean | yes |  |  |
+| `install.assistantReason` | string or null | yes |  | one of "platform_key_missing", "own_key_missing", "own_key_unreadable", "mock_not_allowed", "settings_invalid", null |

@@ -45,11 +45,15 @@ export interface Identity {
   name?: string;
   traits?: Record<string, string | number | boolean | null>;
   /**
-   * The person's roles in the host's app, signed with the id and email. They count only when the
-   * signature verifies; the assistant then answers from documents tagged with them too.
+   * The person's roles in the host's app; the assistant then answers from documents tagged with
+   * them too. Signed with the id and email, they count while the signature verifies, for a day.
+   * Unsigned, they count only where the project trusts unsigned roles, and are dropped elsewhere.
    */
   roles?: string[];
-  /** When the host's server signed the roles, in unix seconds. Needed with roles; they lapse a day later. */
+  /**
+   * When the host's server signed the roles, in unix seconds: needed with roles and a signature, and
+   * they lapse a day later. Unsigned roles need none.
+   */
   signedAt?: number;
   /** HMAC of the id, email and roles with the project's verification secret, computed on the host's server. */
   signature?: string;

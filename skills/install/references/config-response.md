@@ -17,6 +17,7 @@
 | `identity` | object | yes |  |  |
 | `identity.verificationRequired` | boolean | yes |  |  |
 | `identity.anonymousAllowed` | boolean | yes |  |  |
+| `identity.unsignedRoles` | string | yes |  | one of "trusted", "ignored" |
 | `entitlements` | object | yes |  |  |
 | `entitlements.appearance` | boolean | yes |  |  |
 | `entitlements.customStrings` | boolean | yes |  |  |
@@ -46,6 +47,7 @@
 | `assistant.name` | string or null | yes |  |  |
 | `assistant.productName` | string | yes |  |  |
 | `assistant.suggestions` | array of string | yes |  |  |
+| `assistant.ready` | boolean | yes |  |  |
 | `realtime` | object | yes |  |  |
 | `realtime.enabled` | boolean | yes |  |  |
 | `realtime.key` | string or null | yes |  |  |

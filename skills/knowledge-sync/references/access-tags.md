@@ -4,7 +4,7 @@
 
 Restricting documents and sections to the roles a signed identity carries, as the help article explains it to staff.
 
-From the help article "Limit answers to some of your users" (`docs/help/knowledge/limit-answers-to-roles.md`, reviewed 2026-11-05). The same text answers in the Ask tab on opem.app.
+From the help article "Limit answers to some of your users" (`docs/help/knowledge/limit-answers-to-roles.md`, reviewed 2026-11-08). The same text answers in the Ask tab on opem.app.
 
 ## Can I give some documents only to some of my users?
 
@@ -12,7 +12,13 @@ Yes, on the Professional and Enterprise plans. Tag a document or a section with 
 
 On Free and Basic the tags cannot be changed and the roles your app signs are not read, so anything tagged is hidden from everyone rather than shown to the wrong people. If you move to one of those plans with tags in place, the Knowledge page says how many documents and sections are hidden, with an Upgrade link; the tags stay, and answers from them come back when you upgrade.
 
-The roles come from your own app: your server signs them into each person's identity, as it signs their id and email. Opem never decides who has a role; it only reads what your server signed.
+The roles come from your own app: your server signs them into each person's identity, as it signs their id and email. Opem never decides who has a role; it only reads what your app sent.
+
+## Do roles sent without a signature count?
+
+Only when you switch on "Trust unsigned roles" on the Identity tab of the project's Configuration page. Then the roles your page passes to `Opem.identify()` without a signature open the documents tagged for them just as signed roles do, and the person's card in your inbox shows them marked "Unverified". With the switch off, the default, those roles are ignored and the person sees public documents only.
+
+Think before switching it on: anyone who has your publishable key, which is in every page that loads the widget, can claim any role from their browser and read everything tagged for it. Keep it off, and sign identities, for material only some of your users may read.
 
 ## How do I tag a document?
 
@@ -46,7 +52,7 @@ Owners and admins can change the list and the tags. Agents can see them, and can
 
 They get the answer they would get if the documentation did not cover their question: the assistant says it cannot help with that here and offers to send a request, with their question already filled in. The assistant never sees the hidden text, so it cannot quote it, hint at it or mention that it exists.
 
-People who are not signed in, and people whose identity is not signed by your server, get public documents only.
+People who are not signed in, and people whose identity is not signed by your server, get public documents only, unless you trust unsigned roles (above).
 
 ## How do I check what a role can read?
 

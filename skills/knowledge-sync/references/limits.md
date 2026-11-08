@@ -8,7 +8,8 @@
 | Size of one document | 512 KB |
 | Paths in `keepPaths` (prune) | 5,000 |
 | Management API calls a minute, per secret key | 120 |
-| Plans with the management API | Professional and Enterprise |
+| Plans whose secret key reaches this sync | Free, Basic, Professional and Enterprise |
+| Plans with prune and the rest of the management API | Professional and Enterprise |
 | Documents per account, by plan | Free 20; Basic 100; Professional 500; Enterprise custom |
 
 `syncDocuments()` in `@opem/node` splits any number of documents into calls under these limits, retries `429` and `503` after `Retry-After`, and sends `keepPaths` only on the last call when `prune` is on. Document paths end in `.md`, `.mdoc` or `.markdoc`. The document cap counts every source (sync, upload, written in the dashboard, crawled) across the whole account.

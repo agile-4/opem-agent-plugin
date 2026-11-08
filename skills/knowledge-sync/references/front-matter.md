@@ -2,7 +2,7 @@
 
 # Markdoc documents
 
-Documents are Markdoc (plain Markdown is valid Markdoc) with front matter the assistant indexes: `title`, `about`, `tags`, `access`. Headings become the sections the assistant answers from, so write them as the questions people ask.
+Documents are Markdoc (plain Markdown is valid Markdoc) with optional front matter the assistant indexes: `title`, `about`, `tags`, `access`. Without a `title` Opem takes the first heading, else the file name; without an `about`, the first paragraph. Headings become the sections the assistant answers from, so write them as the questions people ask, as `#` headings rather than bold lines.
 
 ## Front matter and sections
 

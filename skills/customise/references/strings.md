@@ -2,7 +2,7 @@
 
 # Widget strings
 
-The 112 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
+The 113 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
 
 | Key | Default | Where it appears |
 |---|---|---|
@@ -41,6 +41,7 @@ The 112 strings the widget shows, in British English. A project overrides them o
 | `ask.retry` | Try again | The button after an answer failed |
 | `ask.errorGeneric` | Sorry, I could not answer that. | When an answer failed |
 | `ask.capReached` | The assistant is paused this month. Send a request instead. | When the project's monthly answers are used |
+| `ask.unavailable` | The assistant is not available right now. Send a request instead. | When the assistant cannot answer: no usable key or model (a 503) |
 | `ask.dailyLimit` | You have asked a lot today. Send a request instead, or try again tomorrow. | When the person has asked their daily limit |
 | `ask.cutShort` | This answer was cut short. | Under an answer that ended early |
 | `ask.refused` | I can't help with that one. You can send a request instead. | When the assistant declines a question |

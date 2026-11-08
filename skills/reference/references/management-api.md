@@ -2,7 +2,7 @@
 
 # The management API (Opem API 1.0.0)
 
-Server-to-server calls with a project's secret key: `Authorization: Bearer sk_…`. Professional and Enterprise plans only; on other plans every call is refused with `403` and `plan_limit_reached`. 120 calls a minute per key. The live document is `https://support.opem.app/api/openapi.json`; `@opem/node` wraps these calls (`createManagementClient`, `syncDocuments`).
+Server-to-server calls with a project's secret key: `Authorization: Bearer sk_…`. On every plan the key reaches the knowledge sync, `PUT /api/v1/manage/knowledge/documents` without `prune`, within the plan's document cap. The rest of the API, and `prune`, is for Professional and Enterprise plans only; on other plans those calls are refused with `403` and `plan_limit_reached`. 120 calls a minute per key. The live document is `https://support.opem.app/api/openapi.json`; `@opem/node` wraps these calls (`createManagementClient`, `syncDocuments`).
 
 ## Management
 
@@ -22,6 +22,7 @@ Response 200: The project
 | `allowedOrigins` | array of string | yes |  |  |
 | `requireIdentityVerification` | boolean | yes |  |  |
 | `identityVerificationRequired` | boolean | yes |  |  |
+| `trustUnsignedRoles` | boolean | yes |  |  |
 | `features` | object | yes |  |  |
 | `features.ask` | boolean | yes |  |  |
 | `features.requests` | boolean | yes |  |  |
@@ -128,7 +129,7 @@ Response 429, `rate_limited`: `rate_limited`: Too many requests; try again short
 
 Sync documents by path
 
-Up to 100 documents of up to 512 KB each. With prune, synced documents whose path is neither sent nor in keepPaths are deleted; uploaded and authored documents never are.
+On every plan, within the plan's document cap: a secret key on Free and Basic reaches this endpoint only. Up to 100 documents of up to 512 KB each. With prune, synced documents whose path is neither sent nor in keepPaths are deleted; uploaded and authored documents never are. Prune needs the management API (Professional and Enterprise).
 
 Body:
 
@@ -154,6 +155,7 @@ Response 200: What happened to each path
 | `documents[].issues[].id` | string | yes |  |  |
 | `documents[].issues[].message` | string | yes |  |  |
 | `documents[].replacedSource` | string | no |  | one of "upload", "authored" |
+| `documents[].derived` | array of string | no |  |  |
 
 Response 401, `unauthenticated`: `unauthenticated`: No valid credential for this surface
 
@@ -223,6 +225,8 @@ Response 200: A page of requests
 | `items[].endUser.name` | string or null | yes |  |  |
 | `items[].endUser.email` | string or null | yes |  |  |
 | `items[].endUser.verified` | boolean | yes |  |  |
+| `items[].endUser.roles` | array of string | yes |  |  |
+| `items[].endUser.rolesVerified` | boolean or null | yes |  |  |
 | `items[].pageUrl` | string or null | yes |  |  |
 | `nextCursor` | string or null | yes |  |  |
 | `closedNotShown` | integer or null | yes |  | at least 0 |
@@ -270,6 +274,8 @@ Response 200: The request
 | `endUser.name` | string or null | yes |  |  |
 | `endUser.email` | string or null | yes |  |  |
 | `endUser.verified` | boolean | yes |  |  |
+| `endUser.roles` | array of string | yes |  |  |
+| `endUser.rolesVerified` | boolean or null | yes |  |  |
 | `endUser.traits` | object | yes |  |  |
 | `endUser.otherRequests` | integer | yes |  | at least 0 |
 | `endUser.pendingIdentity` | object or null | yes |  |  |

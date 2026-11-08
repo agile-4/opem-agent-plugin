@@ -21,8 +21,9 @@ Every API error is JSON in one shape: `{ "error": { "code", "message", "requestI
 | `rate_limited` | 429 |
 | `internal` | 500 |
 | `unavailable` | 503 |
+| `assistant_not_set_up` | 503 |
 
-From the help article "API limits and errors" (`docs/help/developer/limits-and-errors.md`, reviewed 2026-10-31). The same text answers in the Ask tab on opem.app.
+From the help article "API limits and errors" (`docs/help/developer/limits-and-errors.md`, reviewed 2026-11-07). The same text answers in the Ask tab on opem.app.
 
 ## What happens when I call the API too often?
 
@@ -32,7 +33,7 @@ Opem refuses the call with status `429` and the error code `rate_limited`, and t
 
 ## What are the management API's limits?
 
-Each secret key may make 120 calls a minute. Opem counts calls in one-minute windows, so a call over the limit gets `Retry-After: 60`. The management API comes with the Professional and Enterprise plans; on other plans every call is refused with `403` and `plan_limit_reached`.
+Each secret key may make 120 calls a minute. Opem counts calls in one-minute windows, so a call over the limit gets `Retry-After: 60`. On every plan a secret key may sync knowledge documents (`PUT /api/v1/manage/knowledge/documents`, without prune). The rest of the management API, and prune, comes with the Professional and Enterprise plans; on Free and Basic those calls are refused with `403` and `plan_limit_reached`.
 
 To stay under the limit, send documents in batches rather than one call per document (`syncDocuments()` batches them for you), and do not poll: [webhooks](receive-webhooks.md) tell your server when something happens.
 
@@ -85,10 +86,11 @@ Every error is JSON in the same shape, whatever the endpoint:
 | `rate_limited` | 429 | Over a limit; wait for `Retry-After`. |
 | `internal` | 500 | Something failed on our side. |
 | `unavailable` | 503 | A service Opem depends on is busy or not set up; try again later, after `Retry-After` when it is sent. |
+| `assistant_not_set_up` | 503 | The assistant has no usable key or model for this project: Opem's model key is not configured on this deployment, the project's own key, provider or model is missing or cannot be read, or the test model is chosen on a production project. Calls from the widget get a general message; the Assistant page's test console, the Install tab and a coding agent's `get_install_status` say which. The widget hides its Ask tab while this is so ([Why does the widget say the assistant is not available?](../widget/install-the-widget.md#why-does-the-widget-say-the-assistant-is-not-available)). |
 
 ## Which errors should I retry?
 
-Retry `429` and `503`, after the `Retry-After` wait when it is sent, or after a few seconds when it is not. Retry a `500` once or twice with a pause; if it keeps failing, send us the `requestId`. Do not retry any other `4xx` unchanged: the same call will be refused the same way until you fix the request, the key or the plan.
+Retry `429` and `503`, after the `Retry-After` wait when it is sent, or after a few seconds when it is not. The exception is `assistant_not_set_up`: it answers the same until the project's key is set up, so fix that instead. Retry a `500` once or twice with a pause; if it keeps failing, send us the `requestId`. Do not retry any other `4xx` unchanged: the same call will be refused the same way until you fix the request, the key or the plan.
 
 ## Where is the full API reference?
 
