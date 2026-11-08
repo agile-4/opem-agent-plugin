@@ -21,7 +21,6 @@ Response 200: The project
 | `referencePrefix` | string | yes |  | matches ^[A-Z][A-Z0-9]{1,7}$ |
 | `allowedOrigins` | array of string | yes |  |  |
 | `requireIdentityVerification` | boolean | yes |  |  |
-| `identityVerificationRequired` | boolean | yes |  |  |
 | `trustUnsignedRoles` | boolean | yes |  |  |
 | `features` | object | yes |  |  |
 | `features.ask` | boolean | yes |  |  |
@@ -156,6 +155,8 @@ Response 200: What happened to each path
 | `documents[].issues[].message` | string | yes |  |  |
 | `documents[].replacedSource` | string | no |  | one of "upload", "authored" |
 | `documents[].derived` | array of string | no |  |  |
+| `documents[].title` | string | no |  |  |
+| `documents[].about` | string or null | no |  |  |
 
 Response 401, `unauthenticated`: `unauthenticated`: No valid credential for this surface
 

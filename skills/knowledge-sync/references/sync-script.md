@@ -2,14 +2,15 @@
 
 # Syncing documents from CI
 
-`syncDocuments` from `@opem/node` sends a directory of Markdoc files to the project with the secret key, in batches under the limits, and prunes documents that are gone when asked. The management client is the typed client for the other calls.
+`syncDocuments` from `@opem/node` sends a directory of Markdoc files to the project with the secret key, in batches under the limits, and prunes documents that are gone when asked. A refused call throws `SyncError`, whose message carries the status, the code, the request id and, for a 4xx, the API's own sentence (`@opem/node` 0.1.1 or later). The management client is the typed client for the other calls.
 
 ## The sync script
 
-Reads the docs directory and syncs it; `prune: true` only on the main branch.
+Run it from the repository root: each document's path in Opem is its path from there (`docs/billing/refunds.md`), the path the editor sync and the Knowledge page use. It prints each created or updated document with the title Opem stored; pass `--prune` only on the main branch, on Professional or Enterprise.
 
 ```ts file=sync-docs.ts
-import { glob, readFile } from "node:fs/promises";
+import { readdir, readFile, realpath } from "node:fs/promises";
+import { join, sep } from "node:path";
 
 import {
   createManagementClient,
@@ -20,18 +21,38 @@ const opem = createManagementClient({
   secretKey: process.env.OPEM_SECRET_KEY,
 });
 
+// Run from the repository root: a document's path in Opem
+// is its path from there, such as docs/billing/refunds.md.
+// A docs folder that is a link to somewhere outside the
+// repository is refused, so nothing else is ever synced.
+const root = await realpath(".");
+if (!(await realpath("docs")).startsWith(root + sep)) {
+  throw new Error("docs must be inside the repository");
+}
+const entries = await readdir("docs", {
+  recursive: true,
+  withFileTypes: true,
+});
 const documents = [];
-for await (const path of glob("**/*.md", { cwd: "docs" })) {
+for (const entry of entries) {
+  if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
+  const path = join(entry.parentPath, entry.name);
   documents.push({
-    path,
-    content: await readFile(`docs/${path}`, "utf8"),
+    path: path.replaceAll("\\", "/"),
+    content: await readFile(path, "utf8"),
   });
 }
 
 const results = await syncDocuments(opem, documents, {
-  prune: true,
+  prune: process.argv.includes("--prune"),
 });
-console.log(`${results.length} documents in sync`);
+for (const { status, path, title } of results) {
+  if (status === "created" || status === "updated") {
+    console.log(`${status} ${path}: "${title}"`);
+  }
+}
+const kept = results.filter((r) => r.status !== "pruned");
+console.log(`${kept.length} documents in sync`);
 ```
 
 ## The management client

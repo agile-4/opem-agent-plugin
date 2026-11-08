@@ -17,7 +17,7 @@
 | `identity` | object | yes |  |  |
 | `identity.verificationRequired` | boolean | yes |  |  |
 | `identity.anonymousAllowed` | boolean | yes |  |  |
-| `identity.unsignedRoles` | string | yes |  | one of "trusted", "ignored" |
+| `identity.unsignedRoles` | string | yes |  | one of "trusted", "ignored", "not_on_plan" |
 | `entitlements` | object | yes |  |  |
 | `entitlements.appearance` | boolean | yes |  |  |
 | `entitlements.customStrings` | boolean | yes |  |  |

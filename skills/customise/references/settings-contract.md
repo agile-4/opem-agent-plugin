@@ -62,7 +62,8 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `features.hybridSearch` | boolean | yes |  |  |
 | `allowedOrigins` | array of string | yes |  |  |
 | `identity` | object | yes |  |  |
-| `identity.enabled` | boolean | yes |  |  |
+| `identity.required` | boolean | yes |  |  |
+| `identity.trustUnsignedRoles` | boolean | yes |  |  |
 | `identity.secret` | object or null | yes |  |  |
 | `identity.secret.prefix` | string | yes |  |  |
 | `identity.secret.createdAt` | string (date-time) | yes |  |  |

@@ -16,7 +16,7 @@ The roles come from your own app: your server signs them into each person's iden
 
 ## Do roles sent without a signature count?
 
-Only when you switch on "Trust unsigned roles" on the Identity tab of the project's Configuration page. Then the roles your page passes to `Opem.identify()` without a signature open the documents tagged for them just as signed roles do, and the person's card in your inbox shows them marked "Unverified". With the switch off, the default, those roles are ignored and the person sees public documents only.
+Only on Professional and Enterprise, and only when you switch on "Trust unsigned roles" on the Identity tab of the project's Configuration page; on Free and Basic the switch is not offered. Then the roles your page passes to `Opem.identify()` without a signature open the documents tagged for them just as signed roles do, and the person's card in your inbox shows them marked "Unverified". With the switch off, the default, those roles are ignored and the person sees public documents only.
 
 Think before switching it on: anyone who has your publishable key, which is in every page that loads the widget, can claim any role from their browser and read everything tagged for it. Keep it off, and sign identities, for material only some of your users may read.
 

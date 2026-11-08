@@ -11,6 +11,10 @@ Start from the symptom, find the code, apply the fix, and hand over to the skill
 
 Look for the Opem tools (`whoami`, `list_projects`). If the only Opem tool is `authenticate`, call it now and wait for the developer to sign in and consent; then call `whoami`. Only when the server cannot be connected, follow the dashboard path below.
 
+## Stop at the chosen step
+
+Do the steps the developer chose (their answers to the how-far questions the `onboard` and `install` skills ask, or what they asked for) and no further. When the next step would add a dependency, a file to the repository, a key, a workflow or a switch they did not ask for, name it as the next offer and stop. If nothing has been chosen yet, ask before the first such step.
+
 ## Steps
 
 1. **Ask Opem what it sees.** `get_install_status` for the project: `allowedOrigins` against the page's origin, and `lastSeenAt` and `lastSeenOrigin` (null means no page has loaded the widget yet with an allowed origin and a live key). `get_install_snippet` gives the current publishable key and `scriptOrigin`, the host the page's snippet must name; `get_plan` explains a `plan_limit_reached`. A missing origin is `add_allowed_origin`; repeat the returned `allowedOrigins` to the developer.

@@ -11,6 +11,10 @@ Opem posts a signed JSON `POST` to the developer's endpoint for five events. The
 
 Look for the Opem tools (`whoami`, `list_projects`). If the only Opem tool is `authenticate`, call it now and wait for the developer to sign in and consent; then call `whoami`. Only when the server cannot be connected, follow the dashboard path below.
 
+## Stop at the chosen step
+
+Do the steps the developer chose (their answers to the how-far questions the `onboard` and `install` skills ask, or what they asked for) and no further. When the next step would add a dependency, a file to the repository, a key, a workflow or a switch they did not ask for, name it as the next offer and stop. If nothing has been chosen yet, ask before the first such step.
+
 ## Before you start
 
 - Webhooks come with Professional and Enterprise. On other plans the Webhooks tab is read-only and nothing is delivered.

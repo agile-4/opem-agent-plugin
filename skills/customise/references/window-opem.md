@@ -47,7 +47,7 @@ export interface Identity {
   /**
    * The person's roles in the host's app; the assistant then answers from documents tagged with
    * them too. Signed with the id and email, they count while the signature verifies, for a day.
-   * Unsigned, they count only where the project trusts unsigned roles, and are dropped elsewhere.
+   * Unsigned, they count only where the project trusts unsigned roles (Professional and Enterprise), and are dropped elsewhere.
    */
   roles?: string[];
   /**

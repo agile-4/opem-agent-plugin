@@ -11,6 +11,10 @@ After the person signs in to the developer's app, the page calls `Opem.identify(
 
 Look for the Opem tools (`whoami`, `list_projects`). If the only Opem tool is `authenticate`, call it now and wait for the developer to sign in and consent; then call `whoami`. Only when the server cannot be connected, follow the dashboard path below.
 
+## Stop at the chosen step
+
+Do the steps the developer chose (their answers to the how-far questions the `onboard` and `install` skills ask, or what they asked for) and no further. When the next step would add a dependency, a file to the repository, a key, a workflow or a switch they did not ask for, name it as the next offer and stop. If nothing has been chosen yet, ask before the first such step.
+
 ## Step 1: the browser call
 
 1. **Identify after sign-in:** call `Opem.identify({ id, email, name })` once the widget has loaded and the person is signed in, with the app's own stable id for them. Call `Opem.reset()` when they sign out. The browser sample is in [signing.md](references/signing.md).
@@ -19,7 +23,7 @@ Look for the Opem tools (`whoami`, `list_projects`). If the only Opem tool is `a
 
 ## Step 2: harden, when Opem should trust the id
 
-An unsigned id can be forged: anyone who knows a person's id could read their requests from the browser. When that matters, sign on the server and then switch signing on.
+An unsigned id can be forged: anyone who knows a person's id could read their requests from the browser. When that matters, sign on the server and then switch signing on. This step adds a secret, server code and a switch, so take it only when the developer chose signed identities; after step 1 alone, name it as the next offer and stop.
 
 - **Where the signature is made:** on the server, never in the browser. The verification secret starts with `vs_`. It belongs in the server's environment (`OPEM_VERIFICATION_SECRET`), never in code, the repository or a chat.
 - **What is signed:** HMAC-SHA256 over the id, a newline and the email in lower case (nothing after the newline without an email). Lowercase hex. [canonical-string.md](references/canonical-string.md) has the exact string and worked examples.
@@ -44,7 +48,9 @@ When the MCP server cannot be connected, the project's Configuration page, Ident
 
 ## Roles
 
-Roles decide which of the developer's documents the assistant may read for the person (the `knowledge-sync` skill tags them), and staff see them on the person's card in the inbox. Documents open by role only on Professional and Enterprise. There are two ways to send them.
+**Roles are a Professional and Enterprise feature.** Before suggesting roles at all, or writing any roles code, read `get_plan`'s `accessByRole`, true on Professional and Enterprise (without the connection, the plan on the dashboard's Billing page). On Free and Basic the page may send roles, but they open no document, signed or not: signed roles are kept on the person for staff to see, unsigned roles are dropped before anything is stored, and the browser console says once `[Opem] roles were ignored: roles come with the Professional and Enterprise plans; the project's plan does not include them.` The "Trust unsigned roles" switch is not offered there (the Identity tab reads "Roles sent with an identity count on Professional and Enterprise."), and `set_identity_verification` with `trustUnsignedRoles: true` answers `403` `plan_limit_reached`. On those plans, say that roles come with Professional and Enterprise, and stop.
+
+On Professional and Enterprise, roles decide which of the developer's documents the assistant may read for the person (the `knowledge-sync` skill tags them), and staff see them on the person's card in the inbox. There are two ways to send them.
 
 **Signed (the default, and the safe one).**
 
@@ -53,14 +59,14 @@ Roles decide which of the developer's documents the assistant may read for the p
 
 **Unsigned, with "Trust unsigned roles" on.** For an app with no server to sign on, or while the developer accepts the risk: `Opem.identify({ id, email, name, roles })`, no `signedAt` and no `signature`.
 
-- **What they open:** with the project's "Trust unsigned roles" switch on, the roles are kept on the person, shown in the inbox as "Unverified", and open the documents tagged for them, exactly as signed roles do (Professional and Enterprise). They need no `signedAt` and do not lapse.
+- **What they open:** with the project's "Trust unsigned roles" switch on, the roles are kept on the person, shown in the inbox as "Unverified", and open the documents tagged for them, exactly as signed roles do. They need no `signedAt` and do not lapse.
 - **The risk, said plainly to the developer before switching it on:** anyone who has the publishable key (it is in every page) can call `Opem.identify()` from a browser console with any role and read every document tagged for that role. Use it only for documents the developer would not mind such a person reading; sign the identity when that matters.
-- **Switching it on:** connected, `set_identity_verification` with `trustUnsignedRoles: true` (it leaves "Require signed identities" as it is; `required` and `trustUnsignedRoles` can be sent together). Without the connection, the Identity tab of the project's Configuration page has the switch under "Require signed identities". It cannot be switched on while "Require signed identities" is on, since no unsigned identity is accepted then. `list_projects` gives each project's `trustUnsignedRoles`.
-- **With the switch off** (the default), an unsigned identity with roles is still accepted as the person, unverified, with the roles dropped, and the browser console says once: `[Opem] roles were ignored: the project does not trust unsigned roles. Sign the identity, or switch Trust unsigned roles on.`
+- **Switching it on** (Professional and Enterprise; on Free and Basic the answer is `plan_limit_reached`): connected, `set_identity_verification` with `trustUnsignedRoles: true` (it leaves "Require signed identities" as it is; `required` and `trustUnsignedRoles` can be sent together). Without the connection, the Identity tab of the project's Configuration page has the switch under "Require signed identities". It cannot be switched on while "Require signed identities" is on, since no unsigned identity is accepted then. `list_projects` gives each project's `trustUnsignedRoles` beside `requireIdentityVerification`, and `get_widget_settings` gives both as `identity.trustUnsignedRoles` and `identity.required`.
+- **With the switch off** (the default) on Professional and Enterprise, an unsigned identity with roles is still accepted as the person, unverified, with the roles dropped, and the browser console says once: `[Opem] roles were ignored: the project does not trust unsigned roles. Sign the identity, or switch Trust unsigned roles on.`
 
 ## Common mistakes
 
-Signing in the browser; lower-casing the email on one side only; sorting roles on one side only; signing `roles` without `signedAt` (the console says `signedAt is needed with a signature when roles are sent`); a server clock more than five minutes fast; a rotated secret still in an old environment; switching "Require signed identities" on before every page sends a signature; sending unsigned roles and expecting them to count while "Trust unsigned roles" is off.
+Signing in the browser; lower-casing the email on one side only; sorting roles on one side only; signing `roles` without `signedAt` (the console says `signedAt is needed with a signature when roles are sent`); a server clock more than five minutes fast; a rotated secret still in an old environment; switching "Require signed identities" on before every page sends a signature; sending unsigned roles and expecting them to count while "Trust unsigned roles" is off; writing roles code on Free or Basic, where no role opens a document.
 
 ## References
 

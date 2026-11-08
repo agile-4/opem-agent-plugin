@@ -23,7 +23,7 @@ Every API error is JSON in one shape: `{ "error": { "code", "message", "requestI
 | `unavailable` | 503 |
 | `assistant_not_set_up` | 503 |
 
-From the help article "API limits and errors" (`docs/help/developer/limits-and-errors.md`, reviewed 2026-11-07). The same text answers in the Ask tab on opem.app.
+From the help article "API limits and errors" (`docs/help/developer/limits-and-errors.md`, reviewed 2026-11-08). The same text answers in the Ask tab on opem.app.
 
 ## What happens when I call the API too often?
 
@@ -68,6 +68,8 @@ Every error is JSON in the same shape, whatever the endpoint:
 - `message` is English for you and your logs. It can change, so do not match on it.
 - `requestId` is also sent as the `X-Request-Id` header on every response. Include it when you contact support, so we can find the call.
 - `issues` appears only with `validation_failed`, with one entry for each field that broke the rules and the path to it.
+
+`syncDocuments()` in `@opem/node` turns a refused call into a `SyncError` with `status`, `code`, `requestId` and, for a `4xx`, `detail`, the `message` Opem wrote for you; its own message puts them on one line. A `5xx` keeps to the status, the code and the request id (`@opem/node` 0.1.1 or later).
 
 ## Which error codes can I get?
 

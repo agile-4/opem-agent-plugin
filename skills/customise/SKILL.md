@@ -11,6 +11,10 @@ Two places set how the widget looks and behaves: the dashboard's Widget page (sa
 
 Look for the Opem tools (`whoami`, `list_projects`). If the only Opem tool is `authenticate`, call it now and wait for the developer to sign in and consent; then call `whoami`. Only when the server cannot be connected, follow the dashboard path below.
 
+## Stop at the chosen step
+
+Do the steps the developer chose (their answers to the how-far questions the `onboard` and `install` skills ask, or what they asked for) and no further. When the next step would add a dependency, a file to the repository, a key, a workflow or a switch they did not ask for, name it as the next offer and stop. If nothing has been chosen yet, ask before the first such step.
+
 ## What code sets
 
 - **`Opem.init({ … })`** once per page: `theme` (`system`, `light`, `dark`; wins over the project's), `position` (`bottom-right`, `bottom-left`), `launcher: false` to hide the Help button when the page has its own, `trigger` (a selector or element that toggles the panel), `context` (a function returning the page's context), `strings` (overrides by key; applied only on plans with custom strings, and the project's Strings tab wins), `onEvent`.
