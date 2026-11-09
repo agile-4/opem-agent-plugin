@@ -2,26 +2,17 @@
 
 # Opem plugin for coding agents
 
-Opem is a Help widget a company adds to its web app with one script tag, and a dashboard where its support staff answer. This plugin teaches your coding agent (Claude Code, Codex or ChatGPT) to install and configure the widget the way Opem documents it.
+[Opem](https://opem.app) is a Help widget a company adds to its web app with one script tag, and a dashboard where its support staff answer. Behind the Help button, your users ask an assistant that answers from your own documentation, send a request to your team when they need a person, and read the replies.
 
-## What it does
+This plugin teaches your coding agent (Claude Code, Codex or ChatGPT) to install and configure Opem the way Opem documents it. Ask for the widget in plain words: the agent adds it to your app, in your framework, and checks that it loads.
 
-Eight skills, each loaded when the conversation needs it:
+## Quick start
 
-| Skill | What it helps with |
-|---|---|
-| `onboard` | Signing up, creating a project and finding your keys |
-| `install` | The script tag, `@opem/browser`, `@opem/react`, Content-Security-Policy and allowed origins, and a check against the live `/config` endpoint |
-| `identify` | Telling the widget who your users are with Opem.identify(), then signing on your server in Node.js, Python, Ruby, PHP, Go, C# and Java |
-| `knowledge-sync` | Syncing Markdoc documentation from your repository, from CI |
-| `webhooks` | Verifying and handling Opem's webhook deliveries |
-| `customise` | The `window.Opem` surface: kinds, theme, launcher, strings, your own button, events |
-| `troubleshoot` | Every error code, rate limit and plan limit, from symptom to fix |
-| `reference` | Background facts the other skills use: the management API, plans, limits, glossary |
+About ten minutes, from nothing to a Help button in your app. You need Claude Code, Codex or ChatGPT with your app's repository open in it. You make your Opem account on the way, and the Free plan needs no card.
 
-## Install
+### 1. Install the plugin
 
-### Claude Code
+**Claude Code**
 
 ```sh
 claude plugin marketplace add agile-4/opem-agent-plugin
@@ -30,7 +21,7 @@ claude plugin install opem@opem
 
 The skills then appear as /opem:install, /opem:identify and so on.
 
-### Codex
+**Codex**
 
 ```sh
 codex plugin marketplace add agile-4/opem-agent-plugin
@@ -38,7 +29,7 @@ codex plugin marketplace add agile-4/opem-agent-plugin
 
 Then run /plugins in Codex and install Opem; start a new session before using its skills.
 
-### ChatGPT
+**ChatGPT**
 
 ```text
 https://github.com/agile-4/opem-agent-plugin
@@ -46,7 +37,46 @@ https://github.com/agile-4/opem-agent-plugin
 
 Install Opem from the Plugins directory once it is listed there; until then a workspace admin can import this repository as a plugin marketplace.
 
-The folder carries both manifests: `.claude-plugin/plugin.json` and `.mcp.json` for Claude Code, `plugin.json` and `mcp.json` (Agent Plugins 1.0.0) for Codex and ChatGPT; both marketplace files point at `./`.
+### 2. Ask for the widget
+
+In your app's folder, ask your agent in plain words:
+
+```text
+Add the Opem Help widget to this app
+```
+
+The agent then:
+
+1. **Connects to Opem.** Your browser opens Opem's sign-in page. Sign in, or sign up there, choose the organisation the agent should act for, and select Allow. Read and Configure let it do the steps below; Keys stays off unless you want it to create secret keys or webhooks.
+2. **Creates the project**, or uses the one you name, and reads its install snippet and publishable key. The key is public by design: it works only from the sites you allow.
+3. **Adds the widget once**, in the layout every page shares, the way your framework wants it.
+4. **Allows your sites**: your dev server's origin, after asking which port it uses, and your production one.
+5. **Checks the install** against Opem's live `/config` endpoint and tells you whether visitors can ask yet.
+
+Reload your app and the Help button is in the bottom right corner.
+
+### 3. Choose how far to go
+
+With the widget up, the agent asks four questions in one message, each with a default: whether to identify your users, where the assistant's knowledge comes from, who may ask, and whether to set up webhooks and customisation now. A short answer is enough, such as "browser call, sync in CI, the rest as default". Every skill then stops at the step you chose. When the next step would add a dependency, a file, a key, a workflow or a setting you did not ask for, the agent names it as an offer and waits for your yes.
+
+Prefer not to connect? Say so. Every skill still works with the key and settings you copy from the dashboard, and the agent tells you which page to open.
+
+## What to ask
+
+Eight skills, each loaded when the conversation needs it. You do not have to name one: ask, and the agent picks it.
+
+| Ask, for example | Skill | What it helps with |
+|---|---|---|
+| "I have no Opem account yet. How do I start?" | `onboard` | Signing up, creating a project and finding your keys |
+| "Add the Opem Help widget to this app" | `install` | The script tag, `@opem/browser`, `@opem/react`, Content-Security-Policy and allowed origins, and a check against the live `/config` endpoint |
+| "Sign Opem identities on my server" | `identify` | Telling the widget who your users are with `Opem.identify()`, then signing on your server in Node.js, Python, Ruby, PHP, Go, C# and Java |
+| "Sync the Markdown under docs/ to Opem on every merge to main" | `knowledge-sync` | Syncing Markdoc documentation from your repository, from CI |
+| "Write a route that receives Opem's webhooks and only acts on genuine deliveries" | `webhooks` | Verifying and handling Opem's webhook deliveries |
+| "Move the Help button to the bottom left and open it from our own Contact button" | `customise` | The `window.Opem` surface: kinds, theme, launcher, strings, your own button, events |
+| "Why does the Opem widget not appear on my site?" | `troubleshoot` | Every error code, rate limit and plan limit, from symptom to fix |
+| "What can the management API do on our plan?" | `reference` | Background facts the other skills use: the management API, plans, limits, glossary |
+
+In Claude Code each is also a command, `/opem:install`, `/opem:identify` and so on.
 
 ## Connect
 
@@ -56,11 +86,25 @@ The plugin declares Opem's MCP server, `https://support.opem.app/api/v1/mcp`. Co
 
 Nothing of its own. The plugin is instructions and small scripts that run on your machine. It holds no credentials: a connection to Opem's MCP server is an OAuth token your agent keeps, and the tool calls you ask for are the only network calls it makes to your own Opem project (plus the install check against `https://support.opem.app/api/v1/widget/config`). A key or secret a tool returns is shown once; write it to your own environment file, and never paste a secret key or verification secret into a chat.
 
+## Without an agent
+
+Everything the plugin does is documented for doing by hand: [Set up by hand](https://opem.app/docs/by-hand) is the same ten minutes with one script tag. On npm, [`@opem/browser`](https://www.npmjs.com/package/@opem/browser) is the widget for bundlers, [`@opem/react`](https://www.npmjs.com/package/@opem/react) the React provider, button and hook, and [`@opem/node`](https://www.npmjs.com/package/@opem/node) signs identities, verifies webhooks and syncs documentation from your server.
+
+## What is in this repository
+
+One folder for the three clients: `skills/` holds the eight skills with their references and scripts, and `evals/` the cases that check the skills fire and answer correctly. `.claude-plugin/plugin.json` and `.mcp.json` are the manifests Claude Code reads; `plugin.json` and `mcp.json` (Agent Plugins 1.0.0) are for Codex and ChatGPT; both marketplace files point at `./`.
+
+This repository is published from Opem's main repository (`agile-4/opem-agent-plugin` is the mirror), so changes made here directly are overwritten on the next release. Tell us what is wrong or missing at <https://opem.app/contact>.
+
 ## Links
 
-- Documentation: <https://opem.app/docs/agents>
+- Documentation: <https://opem.app/docs/agents>, and the walkthrough [Set up with Claude Code](https://opem.app/docs/claude-code)
+- Connecting, permissions and revoking: <https://opem.app/docs/connect>
+- What the plugin sends: <https://opem.app/docs/plugin-privacy>
 - Privacy policy: <https://opem.app/legal/privacy>
 - Terms: <https://opem.app/legal/terms>
 - Support: <https://opem.app/contact>
 
-This repository is published from Opem's main repository (`agile-4/opem-agent-plugin` is the mirror); changes made here directly are overwritten on the next release.
+## Licence
+
+MIT. Copyright (c) 2026 Agile 4 Ltd.

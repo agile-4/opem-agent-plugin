@@ -2,7 +2,7 @@
 
 # Widget strings
 
-The 113 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
+The 114 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
 
 | Key | Default | Where it appears |
 |---|---|---|
@@ -22,6 +22,7 @@ The 113 strings the widget shows, in British English. A project overrides them o
 | `ask.greetingProjectOnly` | Hi, this is {project}. Ask us anything. | The Ask tab's greeting with the project's name only |
 | `ask.note` | Answers come from {project}'s documentation. | The line under the Ask tab's greeting |
 | `ask.placeholder` | Ask a question | The question box's placeholder |
+| `ask.disclaimer` | Responses are generated using AI and may contain mistakes. | The line under the question box saying answers come from AI and may be wrong |
 | `ask.counter` | {count} of {max} characters | The characters counter under the question box |
 | `ask.send` | Send | The Send button for a question |
 | `ask.stop` | Stop | The Stop button while an answer is written |
