@@ -220,6 +220,7 @@ Response 200: A page of requests
 | `items[].unread` | boolean | yes |  |  |
 | `items[].createdAt` | string (date-time) | yes |  |  |
 | `items[].lastActivityAt` | string (date-time) | yes |  |  |
+| `items[].locale` | string or null | yes |  | one of "en-GB", "de", "es", "fr", "it", "ja", "pt", "zh-Hant", null |
 | `items[].endUser` | object | yes |  |  |
 | `items[].endUser.id` | string (uuid) | yes |  |  |
 | `items[].endUser.kind` | string | yes |  | one of "identified", "anonymous" |
@@ -269,6 +270,7 @@ Response 200: The request
 | `unread` | boolean | yes |  |  |
 | `createdAt` | string (date-time) | yes |  |  |
 | `lastActivityAt` | string (date-time) | yes |  |  |
+| `locale` | string or null | yes |  | one of "en-GB", "de", "es", "fr", "it", "ja", "pt", "zh-Hant", null |
 | `endUser` | object | yes |  |  |
 | `endUser.id` | string (uuid) | yes |  |  |
 | `endUser.kind` | string | yes |  | one of "identified", "anonymous" |
@@ -348,6 +350,7 @@ Response 200: The request
 | `messages[].attachments[].contentType` | string | yes |  | at most 100 characters |
 | `messages[].attachments[].bytes` | integer | yes |  | at least 0 |
 | `messages[].createdAt` | string (date-time) | yes |  |  |
+| `messages[].system` | object or object or null | yes |  |  |
 | `messages[].direction` | string | yes |  | one of "inbound", "outbound" |
 | `messages[].senderCheck` | string or null | yes |  | one of "staff", "reporter", "unverified", null |
 | `messages[].fromAddress` | string or null | yes |  |  |
@@ -400,6 +403,7 @@ Response 201: The reply
 | `attachments[].contentType` | string | yes |  | at most 100 characters |
 | `attachments[].bytes` | integer | yes |  | at least 0 |
 | `createdAt` | string (date-time) | yes |  |  |
+| `system` | object or object or null | yes |  |  |
 | `direction` | string | yes |  | one of "inbound", "outbound" |
 | `senderCheck` | string or null | yes |  | one of "staff", "reporter", "unverified", null |
 | `fromAddress` | string or null | yes |  |  |

@@ -37,6 +37,8 @@
 | `kinds[].label` | string | yes |  | at least 1 character; at most 40 characters |
 | `kinds[].placeholder` | string | no |  | at most 120 characters |
 | `strings` | object | yes |  |  |
+| `locale` | string | yes |  | one of "en-GB", "de", "es", "fr", "it", "ja", "pt", "zh-Hant" |
+| `catalogue` | object | yes |  |  |
 | `poweredBy` | boolean | yes |  |  |
 | `context` | object | yes |  |  |
 | `context.errors` | boolean | no |  | default false |

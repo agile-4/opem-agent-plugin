@@ -2,7 +2,9 @@
 
 # Widget strings
 
-The 114 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
+The 119 strings the widget shows, in British English. A project overrides them on the dashboard's Widget page, Strings tab (plans with custom strings: Basic, Professional and Enterprise). Code may pass `init({ strings })` too; the project's overrides win over it, and both apply only with that entitlement.
+
+In the widget's seven other languages, Opem's own wording of every key comes from `/config` (`catalogue`), on every plan, and the host's and the project's strings are laid over it, so strings passed to `init` show whatever the language: pass them in the language the widget asks for (`locale`).
 
 | Key | Default | Where it appears |
 |---|---|---|
@@ -118,5 +120,10 @@ The 114 strings the widget shows, in British English. A project overrides them o
 | `requests.addShot` | Add a screenshot | The button that adds a screenshot to a reply |
 | `requests.shotsMax` | Up to 4 screenshots on one reply. | When a fifth screenshot is added to a reply |
 | `requests.download` | Download {name} | A file on a reply that is not an image, as a download link |
+| `requests.system.closedBy` | Closed by {name}. | In a request's thread when the team closed it, with the staff member's first name or the project's |
+| `requests.system.reopenedBy` | Reopened by {name}. | In a request's thread when the team reopened it, with the staff member's first name or the project's |
+| `requests.system.closedByApi` | Closed through the API. | In a request's thread when the project's server closed it through the API, naming no one |
+| `requests.system.reopenedByApi` | Reopened through the API. | In a request's thread when the project's server reopened it through the API, naming no one |
+| `requests.system.filesDropped` | Not kept from this email: {files}. | In a request's thread when files on an emailed reply were not kept, with their names and types |
 | `lightbox.close` | Close | The button that closes a screenshot shown full size |
 | `footer.poweredBy` | Powered by Opem | The Powered by Opem badge's name, for screen readers |

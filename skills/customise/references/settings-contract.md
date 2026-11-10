@@ -27,6 +27,34 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `context.extraKeys` | array of string | no |  | at most 20 items; default [] |
 | `context.sensitiveParams` | array of string | no |  | at most 50 items; default [] |
 | `strings` | object | no |  |  |
+| `languages` | object | no |  |  |
+| `languages.default` | string | no |  | one of "en-GB", "de", "es", "fr", "it", "ja", "pt", "zh-Hant"; default "en-GB" |
+| `languages.enabled` | array of string | no |  | at least 1 item; at most 8 items; default ["en-GB"] |
+| `translations` | object | no |  |  |
+| `translations.en-GB` | object | no |  |  |
+| `translations.en-GB.strings` | object | no |  | default {} |
+| `translations.en-GB.kinds` | object | no |  | default {} |
+| `translations.de` | object | no |  |  |
+| `translations.de.strings` | object | no |  | default {} |
+| `translations.de.kinds` | object | no |  | default {} |
+| `translations.es` | object | no |  |  |
+| `translations.es.strings` | object | no |  | default {} |
+| `translations.es.kinds` | object | no |  | default {} |
+| `translations.fr` | object | no |  |  |
+| `translations.fr.strings` | object | no |  | default {} |
+| `translations.fr.kinds` | object | no |  | default {} |
+| `translations.it` | object | no |  |  |
+| `translations.it.strings` | object | no |  | default {} |
+| `translations.it.kinds` | object | no |  | default {} |
+| `translations.ja` | object | no |  |  |
+| `translations.ja.strings` | object | no |  | default {} |
+| `translations.ja.kinds` | object | no |  | default {} |
+| `translations.pt` | object | no |  |  |
+| `translations.pt.strings` | object | no |  | default {} |
+| `translations.pt.kinds` | object | no |  | default {} |
+| `translations.zh-Hant` | object | no |  |  |
+| `translations.zh-Hant.strings` | object | no |  | default {} |
+| `translations.zh-Hant.kinds` | object | no |  | default {} |
 
 ## What the page reads back
 
@@ -53,6 +81,34 @@ What the dashboard's Widget page saves (`PATCH /api/v1/app/projects/{projectId}/
 | `settings.context.extraKeys` | array of string | no |  | at most 20 items; default [] |
 | `settings.context.sensitiveParams` | array of string | no |  | at most 50 items; default [] |
 | `settings.strings` | object | no |  | default {} |
+| `settings.languages` | object | no |  | default {"default":"en-GB","enabled":["en-GB"]} |
+| `settings.languages.default` | string | no |  | one of "en-GB", "de", "es", "fr", "it", "ja", "pt", "zh-Hant"; default "en-GB" |
+| `settings.languages.enabled` | array of string | no |  | at least 1 item; at most 8 items; default ["en-GB"] |
+| `settings.translations` | object | no |  | default {} |
+| `settings.translations.en-GB` | object | no |  |  |
+| `settings.translations.en-GB.strings` | object | no |  | default {} |
+| `settings.translations.en-GB.kinds` | object | no |  | default {} |
+| `settings.translations.de` | object | no |  |  |
+| `settings.translations.de.strings` | object | no |  | default {} |
+| `settings.translations.de.kinds` | object | no |  | default {} |
+| `settings.translations.es` | object | no |  |  |
+| `settings.translations.es.strings` | object | no |  | default {} |
+| `settings.translations.es.kinds` | object | no |  | default {} |
+| `settings.translations.fr` | object | no |  |  |
+| `settings.translations.fr.strings` | object | no |  | default {} |
+| `settings.translations.fr.kinds` | object | no |  | default {} |
+| `settings.translations.it` | object | no |  |  |
+| `settings.translations.it.strings` | object | no |  | default {} |
+| `settings.translations.it.kinds` | object | no |  | default {} |
+| `settings.translations.ja` | object | no |  |  |
+| `settings.translations.ja.strings` | object | no |  | default {} |
+| `settings.translations.ja.kinds` | object | no |  | default {} |
+| `settings.translations.pt` | object | no |  |  |
+| `settings.translations.pt.strings` | object | no |  | default {} |
+| `settings.translations.pt.kinds` | object | no |  | default {} |
+| `settings.translations.zh-Hant` | object | no |  |  |
+| `settings.translations.zh-Hant.strings` | object | no |  | default {} |
+| `settings.translations.zh-Hant.kinds` | object | no |  | default {} |
 | `features` | object | yes |  |  |
 | `features.ask` | boolean | yes |  |  |
 | `features.requests` | boolean | yes |  |  |
